@@ -19,5 +19,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 Route::prefix('movies')->group(function () {
     Route::post('/', 'MoviesController@index');
-    Route::get('/{title?}', 'MoviesController@index2');
 });

@@ -13,20 +13,6 @@ class MoviesController extends Controller
     var $tot_pagina = null;
     var $tot_movies = null;
     // 
-    public function index2($title = null)
-    {
-        $title = urlencode($title);
-        // dd($title);
-        $response_data = $this->_getMovies($title);
-
-        $list_moies_count = $this->_sortMovies($this->movies_array);
-
-        $resposta_json = ["moviesByYear" => $list_moies_count, "total" => $this->tot_movies];
-
-
-        return response()->json($resposta_json);
-    }
-    // 
     public function index(Request $request)
     {
         $title = urlencode($request->title);
@@ -57,8 +43,6 @@ class MoviesController extends Controller
         );
         $context = stream_context_create($opts);
         $json_data = file_get_contents($api_url, false, $context);
-        // if ($this->pagina % 10 == 0) dump($this->pagina . ' - ' . $this->tot_pagina);
-        // dd($json_data);
 
         $response_data = json_decode($json_data);
         $this->pagina = $response_data->page;
